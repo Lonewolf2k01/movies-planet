@@ -1,0 +1,193 @@
+@import "../../../mixins.scss";
+
+.heroBanner {
+    width: 100%;
+    height: 450px;
+    background-color: var(--black);
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    @include md {
+        height: 700px;
+    }
+
+    .image-slider {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+        overflow: hidden;
+        position: absolute;
+        .slider-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            &.active {
+                opacity: 1;
+            }
+        }
+    }
+
+    // .backdrop-img {
+    //     width: 100%;
+    //     height: 100%;
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     opacity: 0.5;
+    //     overflow: hidden;
+
+    //     .lazy-load-image-background {
+    //         width: 100%;
+    //         height: 100%;
+
+    //         img {
+    //             width: 100%;
+    //             height: 100%;
+    //             object-fit: cover;
+    //             object-position: center;
+    //         }
+    //     }
+    // }
+
+    .opacity-layer {
+        width: 100%;
+        height: 250px;
+        background: linear-gradient(180deg, rgba(4, 21, 45, 0) 0%, #04152d 79.19%);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .heroBannerContent {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        align-items: center;
+        color: white;
+        text-align: center;
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+
+        &:hover {
+            animation: Color 4s linear infinite;
+            -webkit-animation: Color 4s ease-in-out infinite;
+        }
+        @keyframes Color {
+            0% {
+                color: #a0d468;
+            }
+
+            30% {
+                color: #ffce54;
+            }
+
+            60% {
+                color: #fc6e51;
+            }
+
+            100% {
+                color: #ac92ec;
+            }
+        }
+
+        .title {
+            font-size: 50px;
+            font-weight: 700;
+            // position: relative;
+            @include md {
+                margin-bottom: 0;
+                font-size: 90px;
+            }
+            // &::before {
+            //     position: absolute;
+            //     content: attr(data-text);
+            //     top: 0;
+            //     left: 0px;
+            //     -webkit-text-fill-color: var(--pink);
+            //     width: 0;
+            //     overflow: hidden;
+            //     transition: 0.5s;
+            // }
+            // &:hover::before {
+            //     width: 100%;
+            // }
+        }
+
+        .subTitle {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            @include md {
+                font-size: 24px;
+            }
+        }
+
+        .searchInput {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            width: 100%;
+
+            input {
+                width: calc(100% - 100px);
+                height: 50px;
+                background-color: transparent;
+                outline: 0;
+                border: 2px solid white;
+                color: white;
+                border-radius: 30px;
+                padding: 0 15px;
+                font-size: 14px;
+                transition: all 0.25s ease-in-out;
+
+                @include md {
+                    width: calc(100% - 150px);
+                    height: 60px;
+                    font-size: 20px;
+                    padding: 0 30px;
+                }
+
+                &::placeholder {
+                    color: white;
+                }
+                &:hover,
+                &:focus {
+                    border-color: #d80286;
+                }
+            }
+
+            button {
+                width: 100px;
+                height: 50px;
+                background: transparent;
+                border: 3px solid #d80286;
+                color: white;
+                outline: 0;
+                border-radius: 30px;
+                font-size: 16px;
+                cursor: pointer;
+                box-shadow: inset 0 0 0 0 #d80286;
+                -webkit-transition: ease-out 0.4s;
+                -moz-transition: ease-out 0.4s;
+                transition: ease-out 0.4s;
+                @include md {
+                    width: 150px;
+                    height: 60px;
+                    font-size: 18px;
+                }
+                &:hover {
+                    transform: scale(1.02);
+                    box-shadow: inset 400px 50px 0 0 #d80286;
+                }
+            }
+        }
+    }
+}
