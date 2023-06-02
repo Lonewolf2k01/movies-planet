@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import useFetch from '../../../hooks/useFetch'
 import { useSelector } from 'react-redux'
 import { motion as m } from 'framer-motion'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Img from '../../../components/lazyLoadImage/Img'
 import ContentWrapper from '../../../components/contentWrapper/ContentWrapper'
@@ -19,6 +21,14 @@ const HeroBanner = () => {
     const [query, setQuery] = useState('')
     const { data, loading } = useFetch('/tv/top_rated')
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const toastOptions = {
+        position: "bottom-right",
+        autoClose: 8000,
+        pauseOnHover: true,
+        draggable: true,
+        theme: 'dark'
+    }
 
     const images = []
     for (let i = 0; i < 20; i++) {
@@ -43,6 +53,14 @@ const HeroBanner = () => {
     //     const bg = images[currentImageIndex]
     //     setBackground(bg)
     // }, [images])
+
+    const submitHandler = () => {
+        if (query.length > 0) {
+            navigate(`/search/${query}`)
+        } else {
+            toast.error("Please Enter a search keyword", toastOptions)
+        }
+    }
 
     const searchQueryHandler = (event) => {
         if (event.key === 'Enter' && query.length > 0) {
@@ -79,9 +97,9 @@ const HeroBanner = () => {
                 <m.div
                     initial={{ y: -50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.5 }} 
+                    transition={{ duration: 0.5 }}
                     className="heroBannerContent">
-                    <span className="subTitle" style={{marginBottom:"1px"}} data-text="Welcome">
+                    <span className="subTitle" style={{ marginBottom: "1px" }} data-text="Welcome">
                         Welcome To
                     </span>
                     <span className="title">
@@ -98,13 +116,13 @@ const HeroBanner = () => {
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyUp={searchQueryHandler}
                         />
-                        <button>
+                        <button onClick={submitHandler}>
                             Search
                         </button>
                     </div>
                 </m.div>
-
             </ContentWrapper>
+                <ToastContainer />
 
         </div>
     )
